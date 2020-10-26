@@ -79,6 +79,7 @@ const getUser = (req, res, next) => {
 	});
 }
 
+// call to edit user form
 const editUser = (req, res) => {
 	console.log('run edit user method');
 
@@ -89,12 +90,12 @@ const editUser = (req, res) => {
 			return res.send('Error: There was a problem retrieving: ' + error);
 		}
 		//Return the user
-		console.log('GET Retrieving ID: ' + user._id);
+		// console.log('GET Retrieving ID: ' + user._id);
 		res.format({
 			//HTML response will render the 'edit.jade' template
 			html: () => {
 				res.render('users/edit', {
-					title: 'Edit user #' + user._id,
+					// title: 'Edit user #' + user._id,
 					user: user
 				});
 			},

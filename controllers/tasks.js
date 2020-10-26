@@ -30,7 +30,8 @@ const addTask = (req, res) => {
 };
 
 const deleteTask = (req, res) => {
-  mongoose.model("Tasks").findById(req.params.id, (error, task) => {
+  const id = req.params.id;
+  mongoose.model("Tasks").findById(id, (error, task) => {
     console.log("deleteTask -> task", task);
     if (error) {
       return res.send(
@@ -43,9 +44,25 @@ const deleteTask = (req, res) => {
           `There was a problem remove the information to the database: ${error}`
         );
       }
-      res.send('remove success !');
+      res.send("remove success !");
     });
   });
 };
 
-module.exports = { getTask, addTask, deleteTask };
+const editTask = (req, res) => {
+  const { taskName, isDone } = req.body;
+  const id = req.params.id;
+  mongoose.model("Tasks").findByIdAndUpdate(id, {
+		taskName: taskName,
+		isDone: isDone,
+	}, (error, task) => {
+    if (error) {
+      return res.send(
+        `There was a problem reomve the information to the database: ${error}`
+      );
+    }
+    res.send(`update successfully ! ${task}`)
+  });
+};
+
+module.exports = { getTask, addTask, deleteTask, editTask };
