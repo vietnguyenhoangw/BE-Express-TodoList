@@ -32,7 +32,6 @@ const addTask = (req, res) => {
 const deleteTask = (req, res) => {
   const id = req.params.id;
   mongoose.model("Tasks").findById(id, (error, task) => {
-    console.log("deleteTask -> task", task);
     if (error) {
       return res.send(
         `There was a problem reomve the information to the database: ${error}`
@@ -44,7 +43,7 @@ const deleteTask = (req, res) => {
           `There was a problem remove the information to the database: ${error}`
         );
       }
-      res.send("remove success !");
+      res.send(`${id}`);
     });
   });
 };
