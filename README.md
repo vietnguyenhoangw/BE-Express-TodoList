@@ -1,4 +1,4 @@
-# ExpressJS Starter Kit - Todo List :pencil:
+# ExpressJS Starter Kit - supper-app :pencil:
 
 ##### The first meet with Nodejs and MongoDb
 I clone this project to learn how to build a basic server using NodeJS(Express framework) and MongoDB to store, query ... data</br>
