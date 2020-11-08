@@ -1,3 +1,4 @@
+const { response } = require('express');
 const mongoose = require('mongoose');
 
 const indexUser = (_req, res, next) => {
@@ -7,20 +8,7 @@ const indexUser = (_req, res, next) => {
 		if (error) {
 			return next(error);
 		}
-		//respond to both HTML and JSON. JSON responses require 'Accept: application/json;' in the Request Header
-		res.format({
-			//HTML response will render the users/index.html
-			html: () => {
-				res.render('./users/list', {
-					title: 'Users list',
-					users: users
-				});
-			},
-			//JSON response will show all users in JSON format
-			json: () => {
-				res.json(users);
-			}
-		});
+		res.send(users);
 	});
 }
 
@@ -39,21 +27,7 @@ const storeUser = (req, res) => {
 		if (error) {
 			return res.send("There was a problem adding the information to the database.");
 		}
-		//user has been created
-		console.log('POST creating new user: ' + user);
-		res.format({
-			//HTML response will set the location and redirect back to the home page. You could also create a 'success' page if that's your thing
-			html: function () {
-				// If it worked, set the header so the address bar doesn't still say /adduser
-				res.location("users");
-				// And forward to success page
-				res.redirect("/users");
-			},
-			//JSON response will show the newly created user
-			json: function () {
-				res.json(user);
-			}
-		});
+		res.send('success');
 	});
 }
 
@@ -148,21 +122,7 @@ const deleteUser = (req, res, next) => {
 			if (error) {
 				return next(error);
 			}
-			//Returning success messages saying it was deleted
-			console.log('DELETE removing ID: ' + user._id);
-			res.format({
-				//HTML returns us back to the main page, or you can create a success page
-				html: () => {
-					res.redirect("/users");
-				},
-				//JSON returns the item with the message that is has been deleted
-				json: () => {
-					res.json({
-						message: 'deleted',
-						item: user
-					});
-				}
-			});
+			res.send(user);
 		});
 	});
 }

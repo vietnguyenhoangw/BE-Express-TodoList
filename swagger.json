@@ -38,9 +38,93 @@
                         "description": "OK"
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Create new user in system",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "User that we want to create",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "New user is created",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{id}/delete": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of user that we want to remove",
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "summary": "Update user with give ID",
+                "tags": [
+                    "Users"
+                ],  
+                "responses": {
+                    "200": {
+                        "description": "User is delete"
+                    }
+                }
+            }
+        },
+        "/tasks": {
+            "get": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Get all task in system",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
             }
         }
     },
     "definitions": {
+        "User": {
+            "required": [
+                "name",
+                "email"
+            ],
+            "properties": {
+                "_id": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "name": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "__v": {
+                    "type": "string"
+                }
+            }
+        }
     }
 }
