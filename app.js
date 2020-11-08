@@ -6,31 +6,16 @@ const express = require('express'),
     logger = require('morgan'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser');
-    
-const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('swagger-jsdoc');
 
-const swaggerOptions = {
-    swaggerDefinition: {
-        info: {
-            title: 'customAPI',
-            description: 'Customer API Infomation',
-            contact: {
-                name: 'Amazing Dev'
-            },
-            servers: ['http://localhost:3000/']
-        }
-    },
-    apis: ['.routes/*.js']
-}
+const swaggerUi = require('swagger-ui-express'),
+swaggerDocument = require('./swagger.json');
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-
-const swaggerDocs = swaggerDocument(swaggerOptions)
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // Load DB connection
 const db = require('./models/db');
