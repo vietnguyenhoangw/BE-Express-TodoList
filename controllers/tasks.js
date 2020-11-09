@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const users = require("./users");
 
 const getTask = (_req, res, next) => {
   mongoose.model("Tasks").find({}, (err, task) => {

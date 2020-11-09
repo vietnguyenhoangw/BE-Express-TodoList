@@ -67,6 +67,42 @@
                 }
             }
         },
+        "/users/{id}/edit": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Edit a user",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID of user that we want to find",
+                        "type": "string"
+                    },
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "User that we want to edit",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Edited user",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
+            }
+        },
         "/users/{id}/delete": {
             "parameters": [
                 {
@@ -78,13 +114,35 @@
                 }
             ],
             "get": {
-                "summary": "Update user with give ID",
+                "summary": "Remove user by Id",
                 "tags": [
                     "Users"
-                ],  
+                ],
                 "responses": {
                     "200": {
                         "description": "User is delete"
+                    }
+                }
+            }
+        },
+        "/users/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of user that we want to find",
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "summary": "Get user by Id",
+                "tags": [
+                    "Users"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "get user success"
                     }
                 }
             }
@@ -98,6 +156,91 @@
                 "responses": {
                     "200": {
                         "description": "OK"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Create new task in system",
+                "parameters": [
+                    {
+                        "name": "task",
+                        "in": "body",
+                        "description": "Task that we want to create",
+                        "schema": {
+                            "$ref": "#/definitions/Task"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "New task is created",
+                        "schema": {
+                            "$ref": "#/definitions/Task"
+                        }
+                    }
+                }
+            }
+        },
+        "/tasks/{id}/edit": {
+            "post": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Edit a taks",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID of task that we want to find",
+                        "type": "string"
+                    },
+                    {
+                        "name": "task",
+                        "in": "body",
+                        "description": "Task that we want to edit",
+                        "schema": {
+                            "$ref": "#/definitions/Task"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Edited user",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
+            }
+        },
+        "/tasks/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of task that we want to remove",
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "summary": "Remove task by Id",
+                "tags": [
+                    "Tasks"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Task is delete"
                     }
                 }
             }
@@ -120,6 +263,30 @@
                 "email": {
                     "type": "string",
                     "uniqueItems": true
+                },
+                "__v": {
+                    "type": "string"
+                }
+            }
+        },
+        "Task": {
+            "required": [
+                "taskName",
+                "isDone"
+            ],
+            "properties": {
+                "_id": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "taskName": {
+                    "type": "string"
+                },
+                "isDone": {
+                    "type": "boolean"
+                },
+                "date": {
+                    "type": "date"
                 },
                 "__v": {
                     "type": "string"
