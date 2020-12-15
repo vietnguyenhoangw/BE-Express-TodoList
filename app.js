@@ -1,6 +1,6 @@
 const express = require('express'),
     app = express(),
-    port = process.env.PORT || 3000,
+    port = process.env.PORT || 3003,
     path = require('path'),
     favicon = require('serve-favicon'),
     logger = require('morgan'),
@@ -23,6 +23,7 @@ const db = require('./models/db');
 // Load user DB
 const users = require('./models/users');
 const tasks = require('./models/tasks');
+const posts = require('./models/posts');
 
 // Load templating and statics
 app.use(express.static(path.join(__dirname, 'public')));

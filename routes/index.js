@@ -7,5 +7,6 @@ router.route('/')
 
 router.use('/users', require('./users'));
 router.use('/tasks', require('./tasks'));	
+router.use('/posts', require('./posts'));	
 
 module.exports = router;
