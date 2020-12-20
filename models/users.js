@@ -8,11 +8,34 @@ const userSchema = new Schema({
 		type: String,
 		required: true
 	},
+	dob: {
+		type: Date,
+		required: true
+	},
+	phone: {
+		type: String,
+		required: true,
+		unique: true
+	},
 	email: {
 		type: String,
 		required: true,
 		unique: true
-	}
+	},
+	createAt: {
+		type: Date,
+		required: true,
+		unique: true
+	},
+	description: {
+		type: String
+	},
+	imageProfile: {
+		type: String
+	},
+	coverImage: {
+		type: []
+	},
 });
 
 module.exports = mongoose.model('Users', userSchema);
