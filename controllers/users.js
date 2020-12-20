@@ -55,8 +55,6 @@ const storeUser = (req, res) => {
 };
 
 const getUser = (req, res, next) => {
-  console.log("run user method");
-
   mongoose.model("Users").findById(req.params.id, (error, user) => {
     if (error) {
       return next(error);
@@ -78,35 +76,21 @@ const getUser = (req, res, next) => {
 
 // call to edit user form
 const editUser = (req, res) => {
-  console.log("run edit user method");
-
   const id = req.params.id;
   // Search for the user within Mongo
   mongoose.model("Users").findById(id, (error, user) => {
     if (error) {
-      return res.send("Error: There was a problem retrieving: " + error);
+      const responseResult = returnFunction.returnRequest(500, null, error);
+      res.send(responseResult);
     }
     //Return the user
     // console.log('GET Retrieving ID: ' + user._id);
-    res.format({
-      //HTML response will render the 'edit.jade' template
-      html: () => {
-        res.render("users/edit", {
-          // title: 'Edit user #' + user._id,
-          user: user,
-        });
-      },
-      //JSON response will return the JSON output
-      json: () => {
-        res.json(user);
-      },
-    });
+    const responseResult = returnFunction.returnRequest(200, user);
+    res.send(responseResult);
   });
 };
 
 const updateUser = (req, res) => {
-  console.log("run update user method");
-
   // Get our REST and form values.
   const id = req.params.id;
   const { name, email } = req.body;
@@ -120,39 +104,30 @@ const updateUser = (req, res) => {
     },
     (error, user) => {
       if (error) {
-        return res.send(
-          "There was a problem updating the information to the database: " +
-            error
-        );
+        const responseResult = returnFunction.returnRequest(500, null, error);
+        res.send(responseResult);
       }
-      //HTML responds by going back to the page or you can be fancy and create a new view that shows a success page.
-      res.format({
-        html: () => {
-          res.redirect("/users/" + user._id);
-        },
-        //JSON responds showing the updated values
-        json: () => {
-          res.json(user);
-        },
-      });
+      const responseResult = returnFunction.returnRequest(200, user);
+      res.send(responseResult);
     }
   );
 };
 
 const deleteUser = (req, res, next) => {
-  console.log("run delete user method");
-
   // Find user to delete by ID
   mongoose.model("Users").findById(req.params.id, (error, user) => {
     if (error) {
-      return next(error);
+      const responseResult = returnFunction.returnRequest(500, null, error);
+      res.send(responseResult);
     }
     //remove it from Mongo
     user.remove((error, user) => {
       if (error) {
-        return next(error);
+        const responseResult = returnFunction.returnRequest(500, null, error);
+        res.send(responseResult);
       }
-      res.send(user);
+      const responseResult = returnFunction.returnRequest(200, user);
+      res.send(responseResult);
     });
   });
 };
