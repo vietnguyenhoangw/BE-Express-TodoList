@@ -22,7 +22,6 @@ const db = require('./models/db');
 
 // Load user DB
 const users = require('./models/users');
-const tasks = require('./models/tasks');
 const posts = require('./models/posts');
 
 // Load templating and statics
