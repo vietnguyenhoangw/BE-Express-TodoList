@@ -27,6 +27,7 @@ const storeUser = (req, res) => {
     description,
     imageProfile,
     coverImage,
+    password
   } = req.body;
 
   //call the create function for our database
@@ -41,6 +42,7 @@ const storeUser = (req, res) => {
       description: description,
       imageProfile: imageProfile,
       coverImage: coverImage,
+      password: password
     },
     (error, user) => {
       if (error) {

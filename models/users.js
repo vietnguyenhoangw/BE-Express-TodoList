@@ -36,6 +36,13 @@ const userSchema = new Schema({
 	coverImage: {
 		type: []
 	},
+	password: {
+		type: String,
+		required: true,
+	},
+	token: {
+		type: String
+	}
 });
 
 module.exports = mongoose.model('Users', userSchema);

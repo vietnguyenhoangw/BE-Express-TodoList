@@ -6,6 +6,7 @@ router.route('/')
 	.get(indexController.dashboard);
 
 router.use('/users', require('./users'));
-router.use('/posts', require('./posts'));	
+router.use('/posts', require('./posts'));
+router.use('/auth', require('./auth'));		
 
 module.exports = router;
